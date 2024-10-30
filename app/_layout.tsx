@@ -1,37 +1,72 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+ export default function RootLayout() {
+   return (
+     <Stack>
+      <Stack.Screen name="profile"  options={{title:'Profile'}} />
+      <Stack.Screen name="forgotpwd"  options={{title:'Forgotpwd'}} />
+     </Stack>
+   );
+ }
+// import React, { useState } from 'react';
+// import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
+// import { Link, useRouter } from 'expo-router';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+// const Index: React.FC = () => {
+//   const [username, setUsername] = useState<string>('');
+//   const [password, setPassword] = useState<string>('');
+//   const router = useRouter();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+//   const handleOnSubmit = () => {
+//     const dbUser: string = 'abc@gmail.com'; 
+//     const dbpwd :string = 'password'
+//     if (username === dbUser && password === dbpwd) {
+//       router.push('/profile');
+//     } else {
+//       console.log('Login failed');
+//     }
+//   };
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+//   return (
+//     <View style={styles.container}>
+//       <Text>Email or Username</Text>
+//       <TextInput
+//         style={styles.input}
+//         value={username}
+//         onChangeText={setUsername}
+//         placeholder="Please enter your username"
+//       />
+//       <Text>Password</Text>
+//       <TextInput
+//         style={styles.input}
+//         value={password}
+//         onChangeText={setPassword}
+//         placeholder="Enter your password"
+//         secureTextEntry
+//       />
+//       <Link href="/forgotpwd">
+//         <Text>Forgot Password</Text>
+//       </Link>
+//       <Button title="Login" onPress={handleOnSubmit} />
+//     </View>
+//   );
+// };
 
-  if (!loaded) {
-    return null;
-  }
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     padding: 16,
+//   },
+//   input: {
+//     height: 40,
+//     borderColor: 'gray',
+//     borderWidth: 1,
+//     marginBottom: 12,
+//     paddingLeft: 8,
+//     width: '100%',
+//   },
+// });
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
-}
+// export default Index;
